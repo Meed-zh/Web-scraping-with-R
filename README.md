@@ -20,12 +20,12 @@ list_url <- paste0("https://www.optioncarriere.com/emploi-data-analyst.html?p=",
 
 ## L'extraction des données par la création d'une boucle 
 
-```{r, eval = FALSE}
+```{r, message = FALSE}
 for (url in list_url){
   
   print(url)
   
-  # EXTRACTION LA PAGE WEB 
+  # Extraction de la page web
   page_offre_html <- try(content(GET(url)),silent=TRUE)
   
   if(class(page_offre_html)[1] == "try-error") next
