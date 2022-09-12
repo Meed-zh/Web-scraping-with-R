@@ -1,14 +1,3 @@
-
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
-```{r, echo = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE, 
-  comment = "#>",
-  fig.path = "README-"  
-)
-```
-
 # Web-scraping-with-R
 In this repository, I will extract data from a job website in France using R language with Rvest package
 
