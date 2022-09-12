@@ -3,7 +3,8 @@ In this repository, I will extract data from a job website in France using R lan
 
 ## Table creation
 
-```tableau_JOB <- tibble(
+```{r, eval = FALSE}
+tableau_JOB <- tibble(
   TITRE = character(),
   ENTREPRISE = character(),
   LIEUX = character(),
