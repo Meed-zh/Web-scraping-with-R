@@ -52,10 +52,11 @@ for (url in list_url){
     offre_emplois <- liste_offre[[k]]
     
     
-    # EXTRACTION DES INFORMATIONS : 	#TITRE DE L'OFFRE, 
-    #ENTREPRISE, 
-    #VILLE, 
-    #TEMPS DE PUBLICATION DE L'OFFRE
+    # EXTRACTION DES INFORMATIONS : 	
+        #TITRE DE L'OFFRE, 
+        #ENTREPRISE, 
+        #VILLE, 
+        #TEMPS DE PUBLICATION DE L'OFFRE
     
     titre <- html_element(offre_emplois, xpath = ".//h2") %>%
       html_text %>%
