@@ -21,10 +21,10 @@ library(rvest)
 
 ```{r, eval = FALSE}
 DF_JOB <- tibble(
-  TITRE = character(),
+  OFFRE = character(),
+  DESCRIPTION = character(),
   ENTREPRISE = character(),
   LIEUX = character(),
-  TEMPS = character()
 )
 ```
 
@@ -92,11 +92,11 @@ for (url in list_url){
     
     
     # INSERTION DES DONNEES SCRAPPER SUR LE TABLEAU DECLARE EN AMONT
-    tableau_JOB <- tableau_JOB %>% 
-      add_row(TITRE = titre,
+    DF_JOB <- DF_JOB %>% 
+      add_row(OFFRE = titre,
+              DESCRIPTION = description,
               ENTREPRISE = entreprise,
-              LIEUX = lieux,
-              TEMPS = temps)
+              LIEUX = lieux)
     
     Sys.sleep(1)
   }
