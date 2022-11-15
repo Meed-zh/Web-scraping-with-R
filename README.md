@@ -17,7 +17,7 @@ library(httr)
 library(rvest)
 ```
 
-#### Je commence d'abord par la création du tableau « DF_JOB » dans lequel je vais collecter les données. Ensuite, avec la fonction « tibble » du package tidyverse, je déclare les noms des colonnes et les types des variables « character ». 
+#### Je commence d'abord par la création du tableau « DF_JOB » dans lequel je vais collecter les données. Ensuite, avec la fonction « tibble » du package tidyverse, je déclare les colonnes et les types des variables « character ». 
 
 ```{r, eval = FALSE}
 DF_JOB <- tibble(
