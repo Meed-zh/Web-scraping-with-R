@@ -17,10 +17,10 @@ library(httr)
 library(rvest)
 ```
 
-## Table creation
+## Je commence d'abord par la création du tableau « DF_JOB » dans lequel je vais collecter les données. Ensuite, avec la fonction « tiblle » du package tidyverse, je déclare les noms des colonnes et les types des variables « character ». 
 
 ```{r, eval = FALSE}
-tableau_JOB <- tibble(
+DF_JOB <- tibble(
   TITRE = character(),
   ENTREPRISE = character(),
   LIEUX = character(),
