@@ -28,15 +28,17 @@ DF_JOB <- tibble(
 )
 ```
 
-## Lister les URLs
+#### La création de l'objet « list_url » dans lequel je stocke la liste des urls à extraire 
 
 ```{r, eval = FALSE}
-list_url <- paste0("https://www.optioncarriere.com/emploi-data-analyst.html?p=",c(1:71))
+list_url <- paste0("https://www.optioncarriere.com/emploi-data.html?p=",c(1:100))
 ```
 
-## L'extraction des données par la création d'une boucle 
+## L'extraction des données en utilisant une boucle « for »
 
 ```{r, message = FALSE}
+
+# D'abord, je crée une boucle sur les urls listés dans « list_url » pour extraire le contenu de chaque url en html.  
 for (url in list_url){
   
   print(url)
