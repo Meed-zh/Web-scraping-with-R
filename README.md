@@ -48,7 +48,7 @@ for (url in list_url){
   
   if(class(page_offre_html)[1] == "try-error") next
   
-  # LISTER LES OFFRES D'EMPLOIS AVEC LA BALISE div
+  # Une fois le contenu des urls est recuperé, je vais lister dans « list_offre » les offres d'emploi qui se trouve dans la balise "//article[@class='job clicky']"
   liste_offre <- html_elements(page_offre_html,xpath = "//article[@class='job clicky']")
   
   
