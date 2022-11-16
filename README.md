@@ -43,16 +43,17 @@ for (url in list_url){
   
   print(url)
   
-  # Extraction de la page web
+  # EXTRACTION LA PAGE WEB 
   page_offre_html <- try(content(GET(url)),silent=TRUE)
   
   if(class(page_offre_html)[1] == "try-error") next
   
-  # Une fois le contenu des urls est recuperé, je vais lister dans « list_offre » les offres d'emploi qui se trouve dans la balise "//article[@class='job clicky']"
+  # Une fois le contenu des urls est récupéré, je vais lister dans « list_offre » les offres d'emploi qui se trouvent 
+  # dans la balise « //article[@class='job clicky'] »
   liste_offre <- html_elements(page_offre_html,xpath = "//article[@class='job clicky']")
   
   
-  # BOUCLE SUR LES OFFRES D'EMPLOIS
+  # Création d'une deuxième boucle sur la liste des offres d'emplois « list_offre »
   for (k in 1:length(liste_offre)){
     
     # Donner l'id de l'extraction en cours
@@ -61,45 +62,55 @@ for (url in list_url){
     # SELECTION DE L'OFFRE [k]
     offre_emplois <- liste_offre[[k]]
     
+    # Excration des informations : 	
+    # « Titre de l'offre », « Description de l'offre », « Entreprise », « Lieux »
+    # D'abord, je recupere le contenu en html avec la fonction « html_element » ensuite je garde uniquement le contenu text 
+    # dans la balise html avec la fonction « html_text »
     
-    # EXTRACTION DES INFORMATIONS : 	
-        #TITRE DE L'OFFRE, 
-        #ENTREPRISE, 
-        #VILLE, 
-        #TEMPS DE PUBLICATION DE L'OFFRE
-    
+    # « Titre de l'offre » :
     titre <- html_element(offre_emplois, xpath = ".//h2") %>%
       html_text %>%
-      str_trim 
+      str_trim %>% # supprimer l'espace 
+      str_remove_all("\n") %>% # supprimer les caractères spéciaux 
+      str_to_lower # Convertir tous les caractères alphabétiques en minuscules
     
+    # « Entreprise » :
     entreprise <- html_element(offre_emplois, xpath = ".//p[@class='company']") %>% 
       html_text %>%
       str_trim %>%
       str_remove_all("\n") %>%
       str_to_lower
     
-    
+    # « Lieux » :
     lieux <- html_element(offre_emplois, xpath = ".//ul[@class='location']") %>%
       html_text %>%
       str_trim %>%
       str_remove_all("\n") %>%
       str_to_lower
     
-    temps <- html_element(offre_emplois, xpath = ".//span[@class='badge badge-r badge-s badge-icon']") %>% 
-      html_text %>%
+    # « Description de l'offre » :
+    # Extraction de l'url de chaque offre d'emploi pour récupérer la description de l'offre
+    url_description <- html_attr(html_element(offre_emplois, xpath = ".//h2/a"),name="href")
+    url_description <- paste("https://www.optioncarriere.com",url_description,sep = "")
+    
+    page_description <- content(GET(url_description))
+    
+    if(class(page_description)[1] == "try-error") next
+    
+    description <- html_text(html_element(page_description, xpath = ".//section[@class='content']")) %>%
       str_trim %>%
-      str_remove_all("\n") %>%
-      str_remove_all("Il y a ") %>%
+      str_remove_all("[.:' ;,?=&^!/-•]<>+\n") %>%
       str_to_lower
-    
-    
-    # INSERTION DES DONNEES SCRAPPER SUR LE TABLEAU DECLARE EN AMONT
+   
+    # Insértion des données scrappées dans le tableau
     DF_JOB <- DF_JOB %>% 
       add_row(OFFRE = titre,
               DESCRIPTION = description,
               ENTREPRISE = entreprise,
               LIEUX = lieux)
     
+    # Pour éviter tout blocage, la fonction « Sys.sleep(1) » permet de faire une pause d'une seconde
+    # après la fin d'extraction de données de chaque url 
     Sys.sleep(1)
   }
 }
