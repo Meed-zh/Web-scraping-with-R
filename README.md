@@ -38,7 +38,8 @@ list_url <- paste0("https://www.optioncarriere.com/emploi-data.html?p=",c(1:100)
 
 ```{r, message = FALSE}
 
-# D'abord, je crée une boucle sur les urls listés dans « list_url » pour extraire le contenu de chaque url en html.  
+# D'abord, je crée une boucle sur les urls listés dans « list_url » pour extraire le contenu de chaque 
+# url en html.  
 for (url in list_url){
   
   print(url)
@@ -48,8 +49,8 @@ for (url in list_url){
   
   if(class(page_offre_html)[1] == "try-error") next
   
-  # Une fois le contenu des urls est récupéré, je vais lister dans « list_offre » les offres d'emploi qui se trouvent 
-  # dans la balise « //article[@class='job clicky'] »
+  # Une fois le contenu des urls est récupéré, je vais lister dans « list_offre » les offres d'emploi qui 
+  # se trouvent dans la balise « //article[@class='job clicky'] »
   liste_offre <- html_elements(page_offre_html,xpath = "//article[@class='job clicky']")
   
   
@@ -64,8 +65,8 @@ for (url in list_url){
     
     # Excration des informations : 	
     # « Titre de l'offre », « Description de l'offre », « Entreprise », « Lieux »
-    # D'abord, je recupere le contenu en html avec la fonction « html_element » ensuite je garde uniquement le contenu  
-    # text dans la balise html avec la fonction « html_text »
+    # D'abord, je recupere le contenu en html avec la fonction « html_element » ensuite je garde uniquement   
+    # le contenu text dans la balise html avec la fonction « html_text »
     
     # « Titre de l'offre » :
     titre <- html_element(offre_emplois, xpath = ".//h2") %>%
