@@ -64,8 +64,8 @@ for (url in list_url){
     
     # Excration des informations : 	
     # « Titre de l'offre », « Description de l'offre », « Entreprise », « Lieux »
-    # D'abord, je recupere le contenu en html avec la fonction « html_element » ensuite je garde uniquement le contenu text 
-    # dans la balise html avec la fonction « html_text »
+    # D'abord, je recupere le contenu en html avec la fonction « html_element » ensuite je garde uniquement le contenu  
+    # text dans la balise html avec la fonction « html_text »
     
     # « Titre de l'offre » :
     titre <- html_element(offre_emplois, xpath = ".//h2") %>%
